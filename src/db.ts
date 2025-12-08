@@ -6,12 +6,7 @@ export class OtAssetInventoryDB extends Dexie {
   assets!: Table<Asset, number>;
 
   constructor() {
-    super('OtAssetInventoryDB');
-
-    // previous version(1)...
-    // this.version(1).stores({
-    //   assets: '++id,guid,isDirty'
-    // });
+    super('OtAssetInventoryDB');   
 
     this.version(2).stores({
       // Index by guid, dirty flag, and client+site for querying

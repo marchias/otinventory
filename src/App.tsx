@@ -7,6 +7,7 @@ import SynchAssetsPage from './pages/SynchAssetsPage';
 import { useDirtyCount } from './hooks/useDirtyCount';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
 import SettingsPage from './pages/SettingsPage';
+import SynchedAssetsPage from './pages/SynchedAssetsPage';
 
 const AppShell: React.FC = () => {
   const online = useOnlineStatus();
@@ -30,6 +31,7 @@ const AppShell: React.FC = () => {
           <Route path="/add" element={<AddAssetPage />} />
           <Route path="/synch" element={<SynchAssetsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/synched-assets" element={<SynchedAssetsPage />} />
         </Routes>
       </div>
 
@@ -110,13 +112,22 @@ const AppShell: React.FC = () => {
         <div className="app-nav-label">Sync</div>
       </button>
       <button
-  type="button"
-  onClick={() => navigate('/settings')}
-  className={`app-nav-button ${isSettings ? 'app-nav-button-active' : ''}`}
->
-  <div>⚙️</div>
-  <div className="app-nav-label">Settings</div>
-</button>
+      type="button"
+      onClick={() => navigate('/settings')}
+      className={`app-nav-button ${isSettings ? 'app-nav-button-active' : ''}`}
+    >
+      <div>⚙️</div>
+      <div className="app-nav-label">Settings</div>
+    </button>
+   <button
+    type="button"
+    onClick={() => navigate('/synched-assets')}
+    className={`app-nav-button ${isSettings ? 'app-nav-button-active' : ''}`}
+  >
+    <div className="nav-icon-grid-svg"></div>
+    <div className="app-nav-label">Synched</div>
+  </button>
+
     </nav>
   );
 };
