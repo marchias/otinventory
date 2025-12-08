@@ -172,8 +172,7 @@ const AssetForm: React.FC<AssetFormProps> = ({
       {/* Global context banner */}
       <div style={styles.globalContextBox}>
         {globalSettings ? (
-          <>
-            <div style={styles.contextLabel}>Inventory Context</div>
+          <>           
             <div style={styles.contextValue}>
               Client: <strong>{globalSettings.client}</strong>
             </div>
@@ -398,7 +397,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   imagePlaceholder: {
     width: '100%',
-    height: 140,
+    height: 300,
     borderRadius: 4,
     border: '1px dashed #cbd5e0',
     display: 'flex',
@@ -408,7 +407,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   imagePreviewBox: {
     width: '100%',
-    maxHeight: 220,
+    maxHeight: 400,
     overflow: 'hidden',
     borderRadius: 4,
     border: '1px solid #cbd5e0',

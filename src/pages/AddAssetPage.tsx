@@ -8,7 +8,7 @@ const AddAssetPage: React.FC = () => {
   return (
     <div style={{ padding: '12px 12px 64px' }}>
       <h1 style={{ fontSize: '1.2rem', margin: '4px 0 4px' }}>Add Asset</h1>
-      {settings ? (
+      {/* {settings ? (
         <div style={{ fontSize: '0.8rem', color: '#4a5568', marginBottom: 8 }}>
           Client: <strong>{settings.client}</strong> | Site:{' '}
           <strong>{settings.site}</strong>
@@ -18,7 +18,7 @@ const AddAssetPage: React.FC = () => {
           Client and Site not set. Go to <strong>Settings</strong> to configure
           before inventorying assets.
         </div>
-      )}
+      )} */}
 
       <AssetForm globalSettings={settings ?? undefined} />
     </div>
