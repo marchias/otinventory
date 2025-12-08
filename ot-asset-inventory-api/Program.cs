@@ -80,7 +80,12 @@ app.MapPost("/api/assets/sync", async ([FromBody] SyncRequest request, AppDbCont
                     CreatedAt = dto.CreatedAt,
                     UpdatedAt = dto.UpdatedAt,
                     IsDirty = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    Client = dto.client,
+                    Site = dto.site,
+                    Model = dto.model,
+                    MacAddress = dto.macAddress,
+                    IPAddress = dto.IPAddress
                 };
 
                 await db.Assets.AddAsync(entity);
@@ -95,6 +100,11 @@ app.MapPost("/api/assets/sync", async ([FromBody] SyncRequest request, AppDbCont
                 existing.UpdatedAt = dto.UpdatedAt;
                 existing.IsDirty = false;
                 existing.IsDeleted = false;
+                existing.Site = dto.site;
+                existing.Model = dto.model;
+                existing.MacAddress = dto.macAddress;
+                existing.IPAddress = dto.IPAddress;
+
             }
 
             syncedGuids.Add(dto.Guid);

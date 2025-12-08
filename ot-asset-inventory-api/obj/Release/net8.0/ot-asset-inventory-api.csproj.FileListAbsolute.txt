@@ -169,3 +169,4 @@ C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Release\net8.0\refi
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Release\net8.0\ot-asset-inventory-api.pdb
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Release\net8.0\ot-asset-inventory-api.genruntimeconfig.cache
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Release\net8.0\ref\ot-asset-inventory-api.dll
+C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Release\net8.0\ot-asset-inventory-api.sourcelink.json

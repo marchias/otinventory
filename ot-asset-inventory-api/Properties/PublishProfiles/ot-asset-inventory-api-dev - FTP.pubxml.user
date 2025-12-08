@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABRvAkwmEbkWyGSZqIlbFiQAAAAACAAAAAAAQZgAAAAEAACAAAAB0J1vcsem3ZAKYOmiaGswG1bhs0fDqXjOX50Y5HcKwwQAAAAAOgAAAAAIAACAAAAANPDe8v9C2zIGHH1eQ+7VnAmLQ1tjP9LvF+KBCkEiWaoAAAABWUDcOsOL5Q1ZgZ7WAxmgrrDyz6WDTubreOOtiPLuPh8uUVtNZTCsEXOk+Jkx9qytZqqqIC0ALkbDzB8Yn3MwRyKjfz21JW7Ue8CZSHyg8QqprK8MeH9LHPf7ssiu8hLWckhUz8GbTKX/QWaxlO9IU+OATpSpZlI1owAr3GE9hikAAAADwP5KJBdERJbM2xG/aTxmId3UBxi1Hk7PQBQ/JWlnWTnfQFeygkmB/9OKHUdqyg0s/cOU8L0U8cKCnFPh7j/8Y</EncryptedPassword>
     <_PublishTargetUrl>ftp://waws-prod-sn1-215.ftp.azurewebsites.windows.net/site/wwwroot</_PublishTargetUrl>
-    <History>True|2025-12-05T18:43:31.2341410Z||;False|2025-12-05T12:43:06.4325313-06:00||;True|2025-12-05T12:35:10.3194473-06:00||;False|2025-12-05T12:34:34.7538882-06:00||;False|2025-12-05T12:33:56.6121295-06:00||;True|2025-12-05T12:23:47.5533673-06:00||;</History>
+    <History>True|2025-12-08T16:15:14.5268937Z||;True|2025-12-05T12:43:31.2341410-06:00||;False|2025-12-05T12:43:06.4325313-06:00||;True|2025-12-05T12:35:10.3194473-06:00||;False|2025-12-05T12:34:34.7538882-06:00||;False|2025-12-05T12:33:56.6121295-06:00||;True|2025-12-05T12:23:47.5533673-06:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -103,16 +103,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/22/2021 18:40:24</publishTime>
     </File>
     <File Include="ot-asset-inventory-api.deps.json">
-      <publishTime>12/05/2025 12:43:16</publishTime>
+      <publishTime>12/08/2025 10:15:03</publishTime>
     </File>
     <File Include="ot-asset-inventory-api.dll">
-      <publishTime>12/05/2025 12:43:15</publishTime>
+      <publishTime>12/08/2025 10:14:38</publishTime>
     </File>
     <File Include="ot-asset-inventory-api.exe">
-      <publishTime>12/05/2025 12:43:15</publishTime>
+      <publishTime>12/08/2025 10:14:38</publishTime>
     </File>
     <File Include="ot-asset-inventory-api.pdb">
-      <publishTime>12/05/2025 12:43:15</publishTime>
+      <publishTime>12/08/2025 10:14:38</publishTime>
     </File>
     <File Include="ot-asset-inventory-api.runtimeconfig.json">
       <publishTime>12/05/2025 12:17:04</publishTime>
@@ -211,7 +211,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>12/05/2025 12:43:16</publishTime>
+      <publishTime>12/08/2025 10:15:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

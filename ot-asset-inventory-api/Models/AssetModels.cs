@@ -9,7 +9,13 @@ public record AssetDto(
     DateTime CreatedAt,
     DateTime UpdatedAt,
     bool IsDirty,
-    bool? IsDeleted
+    bool? IsDeleted,
+    string? client,
+    string? site,
+    string? model,
+    string? macAddress,
+    string? IPAddress
+
 );
 
 public record SyncRequest(List<AssetDto> Assets);

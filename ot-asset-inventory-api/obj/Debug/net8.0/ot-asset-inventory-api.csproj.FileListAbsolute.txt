@@ -154,6 +154,7 @@ C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\ot-ass
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\ot-asset-inventory-api.csproj.CoreCompileInputs.cache
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\ot-asset-inventory-api.MvcApplicationPartsAssemblyInfo.cs
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\ot-asset-inventory-api.MvcApplicationPartsAssemblyInfo.cache
+C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\ot-asset-inventory-api.sourcelink.json
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Development\ot-asset-inventory\ot-asset-inventory-api\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

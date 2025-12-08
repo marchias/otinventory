@@ -22,7 +22,7 @@ namespace OtAssetInventoryApi.Data
 
             asset.ToTable("Assets");
 
-            asset.HasKey(a => a.Id);
+            //asset.HasKey(a => a.Id);
 
             asset.HasIndex(a => a.Guid)
                  .IsUnique();
@@ -38,7 +38,20 @@ namespace OtAssetInventoryApi.Data
             asset.Property(a => a.Location)
                  .HasMaxLength(200);
 
-            // others default to nvarchar(max) / bit / datetime2
+            asset.Property(a => a.Client)
+                .HasMaxLength(200);
+
+            asset.Property(a => a.Site)
+              .HasMaxLength(200);
+
+            asset.Property(a => a.Model)
+              .HasMaxLength(200);
+
+            asset.HasKey(a => a.MacAddress);
+
+            asset.Property(a => a.IPAddress)
+              .HasMaxLength(200);
+            
         }
     }
 }

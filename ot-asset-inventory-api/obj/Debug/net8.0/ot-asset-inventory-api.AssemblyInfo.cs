@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ot-asset-inventory-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46586d4056b94fbe37f0db287d31a2bdf7335d23")]
 [assembly: System.Reflection.AssemblyProductAttribute("ot-asset-inventory-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ot-asset-inventory-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

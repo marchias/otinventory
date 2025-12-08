@@ -71,24 +71,36 @@ const AssetList: React.FC = () => {
 
       switch (sortColumn) {
         case 'name':
-          aVal = a.name || '';
-          bVal = b.name || '';
+          aVal = a.name ?? '';
+          bVal = b.name ?? '';
           break;
         case 'location':
-          aVal = a.location || '';
-          bVal = b.location || '';
+          aVal = a.location ?? '';
+          bVal = b.location ?? '';
           break;
         case 'description':
-          aVal = a.description || '';
-          bVal = b.description || '';
+          aVal = a.description ?? '';
+          bVal = b.description ?? '';
           break;
-        case 'createdAt':
-          // createdAt is ISO string; lexicographic sort works
-          aVal = a.createdAt || '';
-          bVal = b.createdAt || '';
+        case 'createdAt': {
+          const aStr =
+            typeof a.createdAt === 'string'
+              ? a.createdAt
+              : a.createdAt
+                ? new Date(a.createdAt).toISOString()
+                : '';
+          const bStr =
+            typeof b.createdAt === 'string'
+              ? b.createdAt
+              : b.createdAt
+                ? new Date(b.createdAt).toISOString()
+                : '';
+          aVal = aStr;
+          bVal = bStr;
           break;
+        }
         case 'status':
-          // 0 = synced, 1 = dirty (Pending Sync should sort after Synced in asc)
+          // 0 = synced, 1 = dirty
           aVal = a.isDirty ? 1 : 0;
           bVal = b.isDirty ? 1 : 0;
           break;
@@ -115,7 +127,7 @@ const AssetList: React.FC = () => {
 
   return (
     <div>
-      <div style={styles.headerRow}>   
+      <div style={styles.headerRow}>
         {hasAssets && (
           <div style={styles.viewToggle}>
             <button
@@ -148,9 +160,12 @@ const AssetList: React.FC = () => {
 
       {!hasAssets && <p>No assets captured yet.</p>}
 
-      {hasAssets && viewMode === 'tiles' &&
+      {hasAssets &&
+        viewMode === 'tiles' &&
         renderTiles(sortedAssets, setPreviewImageUrl, setEditingAsset, handleDelete)}
-      {hasAssets && viewMode === 'table' &&
+
+      {hasAssets &&
+        viewMode === 'table' &&
         renderTable(
           sortedAssets,
           setPreviewImageUrl,
@@ -218,59 +233,70 @@ function renderTiles(
 ) {
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
-      {assets.map(asset => (
-        <li key={asset.guid} style={styles.tileItem}>
-          <div style={styles.tileHeaderRow}>
-            <strong>{asset.name}</strong>
-            <span
-              style={{
-                ...styles.tag,
-                backgroundColor: asset.isDirty ? '#f6ad55' : '#48bb78'
-              }}
-            >
-              {asset.isDirty ? 'Pending Sync' : 'Synced'}
-            </span>
-          </div>
-          {asset.location && (
-            <div>
-              <small>Location: {asset.location}</small>
+      {assets.map(asset => {
+        const createdAtStr =
+          typeof asset.createdAt === 'string'
+            ? asset.createdAt
+            : asset.createdAt
+              ? new Date(asset.createdAt).toISOString()
+              : '';
+
+        const createdAtDisplay = createdAtStr
+          ? new Date(createdAtStr).toLocaleString()
+          : '—';
+
+        return (
+          <li key={asset.guid} style={styles.tileItem}>
+            <div style={styles.tileHeaderRow}>
+              <strong>{asset.name}</strong>
+              <span
+                style={{
+                  ...styles.tag,
+                  backgroundColor: asset.isDirty ? '#f6ad55' : '#48bb78'
+                }}
+              >
+                {asset.isDirty ? 'Pending Sync' : 'Synced'}
+              </span>
             </div>
-          )}
-          {asset.description && (
-            <div>
-              <small>{asset.description}</small>
-            </div>
-          )}
-          <div style={{ marginTop: 4, display: 'flex', gap: 8 }}>
-            {asset.imageDataUrl && (
+            {asset.location && (
+              <div>
+                <small>Location: {asset.location}</small>
+              </div>
+            )}
+            {asset.description && (
+              <div>
+                <small>{asset.description}</small>
+              </div>
+            )}
+            <div style={{ marginTop: 4, display: 'flex', gap: 8 }}>
+              {asset.imageDataUrl && (
+                <button
+                  type="button"
+                  style={styles.linkButton}
+                  onClick={() => setPreviewImageUrl(asset.imageDataUrl!)}
+                >
+                  View Picture
+                </button>
+              )}
               <button
                 type="button"
                 style={styles.linkButton}
-                onClick={() => setPreviewImageUrl(asset.imageDataUrl!)}
+                onClick={() => setEditingAsset(asset)}
               >
-                View Picture
+                Edit
               </button>
-            )}
-            <button
-              type="button"
-              style={styles.linkButton}
-              onClick={() => setEditingAsset(asset)}
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              style={{ ...styles.linkButton, color: '#e53e3e' }}
-              onClick={() => handleDelete(asset)}
-            >
-              Delete
-            </button>
-          </div>
-          <small>
-            Created: {new Date(asset.createdAt).toLocaleString()}
-          </small>
-        </li>
-      ))}
+              <button
+                type="button"
+                style={{ ...styles.linkButton, color: '#e53e3e' }}
+                onClick={() => handleDelete(asset)}
+              >
+                Delete
+              </button>
+            </div>
+            <small>Created: {createdAtDisplay}</small>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -329,67 +355,80 @@ function renderTable(
           </tr>
         </thead>
         <tbody>
-          {assets.map(asset => (
-            <tr key={asset.guid}>
-              <td style={styles.td}>{asset.name}</td>
-              <td style={styles.td}>{asset.location}</td>
-              <td style={styles.td}>
-                {asset.description && asset.description.length > 50
-                  ? asset.description.slice(0, 50) + '…'
-                  : asset.description}
-              </td>
-              <td style={styles.td}>
-                {new Date(asset.createdAt).toLocaleString()}
-              </td>
-              <td style={styles.td}>
-                <span
-                  style={{
-                    ...styles.tag,
-                    backgroundColor: asset.isDirty ? '#f6ad55' : '#48bb78'
-                  }}
-                >
-                  {asset.isDirty ? 'Pending Sync' : 'Synced'}
-                </span>
-              </td>
-              <td style={styles.td}>
-                {asset.imageDataUrl ? (
+          {assets.map(asset => {
+            const createdAtStr =
+              typeof asset.createdAt === 'string'
+                ? asset.createdAt
+                : asset.createdAt
+                  ? new Date(asset.createdAt).toISOString()
+                  : '';
+
+            const createdAtDisplay = createdAtStr
+              ? new Date(createdAtStr).toLocaleString()
+              : '—';
+
+            const descriptionShort = asset.description
+              ? asset.description.length > 50
+                ? asset.description.slice(0, 50) + '…'
+                : asset.description
+              : '';
+
+            return (
+              <tr key={asset.guid}>
+                <td style={styles.td}>{asset.name}</td>
+                <td style={styles.td}>{asset.location ?? ''}</td>
+                <td style={styles.td}>{descriptionShort}</td>
+                <td style={styles.td}>{createdAtDisplay}</td>
+                <td style={styles.td}>
+                  <span
+                    style={{
+                      ...styles.tag,
+                      backgroundColor: asset.isDirty ? '#f6ad55' : '#48bb78'
+                    }}
+                  >
+                    {asset.isDirty ? 'Pending Sync' : 'Synced'}
+                  </span>
+                </td>
+                <td style={styles.td}>
+                  {asset.imageDataUrl ? (
+                    <button
+                      type="button"
+                      style={styles.linkButton}
+                      onClick={() => setPreviewImageUrl(asset.imageDataUrl!)}
+                    >
+                      View Picture
+                    </button>
+                  ) : (
+                    <span style={{ color: '#999' }}>—</span>
+                  )}
+                </td>
+                <td style={styles.td}>
                   <button
                     type="button"
                     style={styles.linkButton}
-                    onClick={() => setPreviewImageUrl(asset.imageDataUrl!)}
+                    onClick={() => setEditingAsset(asset)}
                   >
-                    View Picture
+                    Edit
                   </button>
-                ) : (
-                  <span style={{ color: '#999' }}>—</span>
-                )}
-              </td>
-              <td style={styles.td}>
-                <button
-                  type="button"
-                  style={styles.linkButton}
-                  onClick={() => setEditingAsset(asset)}
-                >
-                  Edit
-                </button>
-                {' | '}
-                <button
-                  type="button"
-                  style={{ ...styles.linkButton, color: '#e53e3e' }}
-                  onClick={() => handleDelete(asset)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+                  {' | '}
+                  <button
+                    type="button"
+                    style={{ ...styles.linkButton, color: '#e53e3e' }}
+                    onClick={() => handleDelete(asset)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
 }
 
-// ---- Edit modal (unchanged from previous version) ----
+// ---- Edit modal ----
 
 interface EditAssetModalProps {
   asset: Asset;
@@ -402,11 +441,13 @@ const EditAssetModal: React.FC<EditAssetModalProps> = ({
   onClose,
   onSaved
 }) => {
-  const [name, setName] = useState(asset.name);
-  const [location, setLocation] = useState(asset.location);
-  const [description, setDescription] = useState(asset.description ?? '');
-  const [imageDataUrl, setImageDataUrl] = useState<string | undefined>(
-    asset.imageDataUrl
+  const [name, setName] = useState<string>(asset.name ?? '');
+  const [location, setLocation] = useState<string>(asset.location ?? '');
+  const [description, setDescription] = useState<string>(
+    asset.description ?? ''
+  );
+  const [imageDataUrl, setImageDataUrl] = useState<string | null>(
+    asset.imageDataUrl ?? null
   );
   const [saving, setSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -425,7 +466,7 @@ const EditAssetModal: React.FC<EditAssetModalProps> = ({
   };
 
   const handleRemovePicture = () => {
-    setImageDataUrl(undefined);
+    setImageDataUrl(null);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -440,9 +481,9 @@ const EditAssetModal: React.FC<EditAssetModalProps> = ({
 
     await db.assets.update(asset.id, {
       name: name.trim(),
-      location: location.trim(),
-      description: description.trim() || undefined,
-      imageDataUrl,
+      location: location.trim() || null,
+      description: description.trim() || null,
+      imageDataUrl: imageDataUrl ?? null,
       updatedAt: now,
       isDirty: true // mark for sync
     });

@@ -6,6 +6,7 @@ import AddAssetPage from './pages/AddAssetPage';
 import SynchAssetsPage from './pages/SynchAssetsPage';
 import { useDirtyCount } from './hooks/useDirtyCount';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
+import SettingsPage from './pages/SettingsPage';
 
 const AppShell: React.FC = () => {
   const online = useOnlineStatus();
@@ -28,6 +29,7 @@ const AppShell: React.FC = () => {
           <Route path="/" element={<AssetListPage />} />
           <Route path="/add" element={<AddAssetPage />} />
           <Route path="/synch" element={<SynchAssetsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </div>
 
@@ -36,13 +38,13 @@ const AppShell: React.FC = () => {
   );
 };
 
-const BottomNav: React.FC = () => {
+  const BottomNav: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dirtyCount = useDirtyCount(3000);
-
+  const isSettings = location.pathname === '/settings';
   const isAssets =
-    location.pathname === '/' || location.pathname === '/assets';
+  location.pathname === '/' || location.pathname === '/assets';
   const isAdd = location.pathname === '/add';
   const isSynch = location.pathname === '/synch';
 
@@ -107,6 +109,14 @@ const BottomNav: React.FC = () => {
         </div>
         <div className="app-nav-label">Sync</div>
       </button>
+      <button
+  type="button"
+  onClick={() => navigate('/settings')}
+  className={`app-nav-button ${isSettings ? 'app-nav-button-active' : ''}`}
+>
+  <div>⚙️</div>
+  <div className="app-nav-label">Settings</div>
+</button>
     </nav>
   );
 };
